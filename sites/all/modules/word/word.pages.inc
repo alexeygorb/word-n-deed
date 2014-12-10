@@ -44,6 +44,8 @@ function word_ajax_word_page($nid, $limit) {
     foreach ($view['nodes'] as $nid => $node_render) {
       if (!is_numeric($nid)) continue;
       $response['items'][] = drupal_render($node_render);
+      // Save the last one.
+      $response['last-item'] = (int) $nid;
     }
   }
 
