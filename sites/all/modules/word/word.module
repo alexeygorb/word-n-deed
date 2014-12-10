@@ -1,0 +1,21 @@
+<?php
+
+/**
+ * Implements hook_menu().
+ */
+function word_menu() {
+  $items = array();
+  $items['the-word'] = array(
+    'page callback' => 'word_word_page',
+    'file' => 'word.pages.inc',
+    'type' => MENU_CALLBACK,
+    'access arguments' => array('access content'),
+  );
+  $items['the-deed'] = array(
+    'page callback' => 'word_deed_page',
+    'file' => 'word.pages.inc',
+    'type' => MENU_CALLBACK,
+    'access arguments' => array('access content'),
+  );
+  return $items;
+}
