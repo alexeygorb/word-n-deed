@@ -7,6 +7,7 @@ function word_menu() {
   $items = array();
   $items['the-word'] = array(
     'page callback' => 'word_word_page',
+    'title' => 'With word',
     'file' => 'word.pages.inc',
     'type' => MENU_CALLBACK,
     'access arguments' => array('access content'),
@@ -14,6 +15,14 @@ function word_menu() {
   $items['the-deed'] = array(
     'page callback' => 'word_deed_page',
     'file' => 'word.pages.inc',
+    'title' => 'With deed',
+    'type' => MENU_CALLBACK,
+    'access arguments' => array('access content'),
+  );
+  $items['ajax/word'] = array(
+    'page callback' => 'word_ajax_word_page',
+    'file' => 'word.pages.inc',
+    'page arguments' => array(2, 3),
     'type' => MENU_CALLBACK,
     'access arguments' => array('access content'),
   );
