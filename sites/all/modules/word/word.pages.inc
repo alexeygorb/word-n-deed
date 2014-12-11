@@ -1,7 +1,25 @@
 <?php
 
+
 function word_word_page() {
-  return 'word-page';
+  $render = array();
+  $render['content-wrapper'] = array(
+    '#theme' => 'word_page',
+  );
+  $render['#attached']['js'][] = array(
+    'data' => array('pageSetup' => array(
+      'reserve' => 130,
+      'rowHeight' => 437,
+      'rowCapacity' => 7,
+      'ajaxHandler' => url('ajax/word'),
+      'pagesIncrement' => 3,
+    )),
+    'type' => 'setting',
+  );
+  $render['#attached']['js'][] = array(
+    'data' => drupal_get_path('module', 'word') . '/js/word.js',
+  );
+  return $render;
 }
 
 function word_deed_page() {

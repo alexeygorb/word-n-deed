@@ -28,3 +28,15 @@ function word_menu() {
   );
   return $items;
 }
+
+/**
+ * Implements hook_theme().
+ */
+function word_theme() {
+  return array(
+    'word_page' => array(
+      'variables' => array(),
+      'template' => 'word-page-contents',
+    ),
+  );
+}
