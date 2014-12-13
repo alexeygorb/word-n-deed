@@ -6,19 +6,23 @@ function word_word_page() {
   $render['content-wrapper'] = array(
     '#theme' => 'word_page',
   );
+
+  $path = drupal_get_path('module', 'word');
   $render['#attached']['js'][] = array(
     'data' => array('pageSetup' => array(
-      'reserve' => 130,
-      'rowHeight' => 437,
-      'rowCapacity' => 7,
+      'reserveY' => 130,
+      'reserveX' => 20,
+      'rowHeight' => 350,
+      'colWidth' => 260,
       'ajaxHandler' => url('ajax/word'),
       'pagesIncrement' => 3,
     )),
     'type' => 'setting',
   );
-  $render['#attached']['js'][] = array(
-    'data' => drupal_get_path('module', 'word') . '/js/word.js',
-  );
+  $render['#attached']['js'][] = array('data' => $path . '/js/word.js');
+  $render['#attached']['js'][] = array('data' => $path . '/js/idangerous.swiper.min.js');
+  $render['#attached']['css'][] = array('data' => $path . '/css/idangerous.swiper.css');
+
   return $render;
 }
 

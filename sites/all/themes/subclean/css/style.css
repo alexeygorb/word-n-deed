@@ -1,0 +1,16 @@
+#page {
+  font-size: inherit;
+  width: auto;
+  margin: 0;
+}
+
+.node-teaser-card {
+  width: 260px;
+  height: 350px;
+  overflow: hidden;
+}
+
+#cards-container-inner .column {
+  width: 260px;
+  float: left;
+}
