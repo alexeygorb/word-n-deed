@@ -108,8 +108,17 @@
         loop: false,
         longSwipesRatio: 0.3,
         createPagination: false,
-        speed: 800
+        speed: 800,
+        onSlideChangeStart: function(swiper, direction) { self.onSlideChange(swiper, direction); }
       });
+    },
+
+    onSlideChange: function(swiper, direction) {
+      var self = this;
+      var i = swiper.activeIndex;
+      if (self.pages - 1 <= i) {
+        self.loadNext();
+      }
     }
   }
 
