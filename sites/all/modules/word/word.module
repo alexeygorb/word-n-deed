@@ -38,5 +38,17 @@ function word_theme() {
       'variables' => array(),
       'template' => 'word-page-contents',
     ),
+    'word_add_word' => array(
+      'variables' => array(),
+      'template' => 'word-add-word',
+    ),
   );
+}
+
+function word_preprocess_node(&$vars) {
+  if (!empty($vars['elements']['#attributes'])) {
+    if (!empty($vars['elements']['#attributes']['class'])) {
+      $vars['classes_array'] = array_merge($vars['classes_array'], $vars['elements']['#attributes']['class']);
+    }
+  }
 }

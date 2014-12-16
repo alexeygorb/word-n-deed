@@ -35,6 +35,12 @@ function word_ajax_word_page($nid, $limit) {
     $limit = 30;
   }
 
+  // If there is no start point set, then load one less item
+  // in order to prepend the result with the add button.
+  if (empty($nid)) {
+    $limit--;
+  }
+
   $query = db_select('node', 'n')
     ->fields('n', array('nid'))
     ->condition('status', 1)
@@ -60,10 +66,24 @@ function word_ajax_word_page($nid, $limit) {
   }
 
   $response['items'] = array();
+  $i = 0;
+  if (empty($nid)) {
+    $i++;
+    $render = array('#theme' => 'word_add_word');
+    $response['items'][] = drupal_render($render);
+  }
+
   if (!empty($nodes_list)) {
     $nodes = node_load_multiple($nodes_list);
     $view = node_view_multiple($nodes);
     foreach ($view['nodes'] as $nid => $node_render) {
+      $i++;
+      $style = 'two';
+      if (round($i / 2) % 2 == 1) {
+        $style = 'one';
+      }
+
+      $node_render['#attributes']['class'][] = 'style-' . $style;
       if (!is_numeric($nid)) continue;
       $response['items'][] = drupal_render($node_render);
       // Save the last one.
