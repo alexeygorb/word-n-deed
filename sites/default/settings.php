@@ -40,11 +40,15 @@ $conf['404_fast_paths'] = '/\.(?:txt|png|gif|jpe?g|css|js|ico|swf|flv|cgi|bat|pl
 $conf['404_fast_html'] = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN" "http://www.w3.org/MarkUp/DTD/xhtml-rdfa-1.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>404 Not Found</title></head><body><h1>Not Found</h1><p>The requested URL "@path" was not found on this server.</p></body></html>';
 
 
-$conf['vk_openapi_app_id'] = '4684920';
-$conf['vk_openapi_secret_key'] = 'Xudnb5hyz3UgNReu286q';
+$conf['vk_app_id'] = '4684920';
+$conf['vk_secret'] = 'Xudnb5hyz3UgNReu286q';
 
 if ($conf['environment'] == 'test') {
-  $conf['fboauth_id'] = '682648925150602';
-  $conf['fboauth_secret'] = '9dde97ddf3302acf612a2bec79763704';
+  $conf['fb_appid'] = '1566203040283717';
+  $conf['fb_secret'] = '6848e4dfca191408216fe7e97d826c18';
+}
 
+if ($conf['environment'] == 'prod') {
+  $conf['fb_appid'] = '1566203040283717';
+  $conf['fb_secret'] = '6848e4dfca191408216fe7e97d826c18';
 }

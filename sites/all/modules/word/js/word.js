@@ -19,6 +19,26 @@
             setTimeout(function() {$("#word-add-form #edit-file").attr('disabled', 'disabled');}, 300);
           }
         });
+
+        var textItem = $('#word-add-form .form-item-text');
+        var charWrapper = textItem.find('.description span');
+        var maxCharCount = charWrapper.text();
+        var textarea = textItem.find('textarea');
+
+        var handler = function(e) {
+          var value = $(this).val();
+          if (value.length > maxCharCount) {
+            e.preventDefault();
+          }
+          // Chop chop!
+          value = value.substr(0, maxCharCount);
+          $(this).val(value);
+          charWrapper.html(maxCharCount - value.length);
+        };
+
+        textarea.change(handler);
+        textarea.keyup(handler);
+
       }
     }
   };

@@ -11,8 +11,16 @@
     <?php
       hide($content['comments']);
       hide($content['links']);
-      print render($content);
+      print render($content['field_card_photo']);
     ?>
+
+    <?php if ($display_submitted): ?>
+      <div class="submitted">
+        <?php print $submitted; ?>
+      </div>
+    <?php endif; ?>
+
+    <?php print render($content); ?>
   </div>
 
 </div>

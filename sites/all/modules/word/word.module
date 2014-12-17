@@ -26,6 +26,13 @@ function word_menu() {
     'type' => MENU_CALLBACK,
     'access arguments' => array('access content'),
   );
+  $items['ajax/avatar'] = array(
+    'page callback' => 'word_ajax_avatar_save',
+    'file' => 'word.pages.inc',
+    'type' => MENU_CALLBACK,
+    'access arguments' => array('access content'),
+  );
+
   return $items;
 }
 
@@ -47,27 +54,46 @@ function word_theme() {
   );
 }
 
-function word_add_form() {
+function word_add_form($form, &$form_state) {
+
   $form = array();
+  $form['header'] = array(
+    '#markup' => '<h2>Постав аватар</h2>',
+  );
   $form['im-container'] = array(
     '#prefix' => '<div id="im-area">',
     'image' => array(
-      '#markup' => '<img typeof="foaf:Image" src="/' . drupal_get_path('module', 'word') . '/images/profile.jpg" width="125" height="125" />',
+      '#markup' => '',
     ),
     'fid' => array(
       '#type' => 'hidden',
       '#default_value' => 0,
     ),
+    'token' => array(
+      '#type' => 'hidden',
+      '#default_value' => drupal_get_token('0'),
+    ),
     '#suffix' => '</div>',
+    '#after_build' => array('word_add_form_preview_after_build'),
   );
-  $form['file'] = array(
+  $form['ava_source'] = array(
+    '#type' => 'container',
+    '#attributes' => array(
+      'class' => array(
+        'ava-source-container',
+      ),
+    ),
+  );
+  $form['ava_source']['file'] = array(
     '#type' => 'file',
     '#title' => t('Завантажити з комп’ютера'),
   );
-  $form['upload'] = array(
+
+  $form['ava_source']['upload'] = array(
     '#type' => 'submit',
     '#value' => t('Upload'),
     '#executes_submit_callback' => FALSE,
+    '#limit_validation_errors' => array(),
     '#ajax' => array(
       'callback'=> 'word_upload_image',
       'wrapper'=> 'im-area',
@@ -75,17 +101,41 @@ function word_add_form() {
       'effect'=> 'fade',
     ),
   );
+  $form['ava_source']['alt'] = array(
+    '#markup' => '<h4>або з соцмережі:</h4><a href="#" id="fb-login-image">FB</a><a href="#" id="vk-login-image">VK</a>'
+  );
+
+  $form['header2'] = array(
+    '#markup' => '<h3>Напиши кілька теплих слів солдатам</h3>',
+  );
+
+  $form['text'] = array(
+    '#type' => 'textarea',
+    '#description' => 'Залишилось символів: <span>' . variable_get('word_chars_limit', 200) . '</span>',
+  );
+
   $form['submit'] = array(
     '#type' => 'submit',
     '#value' => t('Publish'),
-    // '#submit' => array('word_upload_image'),
   );
   return $form;
 }
 
+function word_add_form_preview_after_build($element, &$form_state) {
+  watchdog('test', 'call');
+  $image_path = '/' . drupal_get_path('module', 'word') . '/images/profile.jpg';
+  if (!empty($form_state['values']['fid'])) {
+    $file = file_load($form_state['values']['fid']);
+    $image_path = image_style_url('card_thumb', $file->uri);
+  }
+  $element['image']['#markup'] = '<img typeof="foaf:Image" src="' . $image_path .'" width="125" height="125" />';
+
+  return $element;
+}
+
 function word_upload_image($form, $form_state){
 
-  $file = file_save_upload('file', array('file_validate_extensions' => array('png gif jpg jpeg')), "public://avatars",$replace = FILE_EXISTS_REPLACE);
+  $file = file_save_upload('file', array('file_validate_extensions' => array('png gif jpg jpeg')), "public://avatars",$replace = FILE_EXISTS_RENAME);
   if ($file)
   {
     // $file->status=FILE_STATUS_PERMANENT;
@@ -100,6 +150,11 @@ function word_upload_image($form, $form_state){
         '#name' => 'fid',
         '#value' => $file->fid,
       ),
+      'token' => array(
+        '#type' => 'hidden',
+        '#name' => 'token',
+        '#value' => drupal_get_token($file->fid),
+      ),
       '#suffix'=>'</div>',
     );
   }
@@ -110,9 +165,39 @@ function word_upload_image($form, $form_state){
   return $form['im-container'];
 }
 
+function word_add_form_validate($form, &$form_state) {
+  if (empty($form_state['values']['text'])) {
+    form_error($form['text'], t('Please enter the message for our soldiers'));
+  }
+  if (empty($form_state['values']['fid']) || empty($form_state['values']['token'])
+    || $form_state['values']['token'] !== drupal_get_token($form_state['values']['fid'])
+  ) {
+    form_error($form['im-container'], t('Please upload an image'));
+  }
+}
+
 function word_add_form_submit($form, $form_state) {
-  var_dump($form_state, $_FILES);
-  die();
+  // Publish the file.
+  $file = file_load($form_state['values']['fid']);
+  $file->status = FILE_STATUS_PERMANENT;
+  file_save($file);
+
+  global $language;
+
+  $e = entity_create('node', array('type' => 'card'));
+  $e->language = $language->language;
+  // Create a Entity Wrapper of that new Entity
+  $entity = entity_metadata_wrapper('node', $e);
+  // Specify the title.
+  $entity->title = drupal_substr($form_state['values']['text'], 0, 100);
+  $entity->status = NODE_NOT_PUBLISHED;
+  $entity->field_card_photo->set( array('fid' => $form_state['values']['fid']) );
+  $entity->field_text = drupal_substr($form_state['values']['text'], variable_get('word_chars_limit', 0, 200));
+  // Save the node.
+  $entity->save();
+
+  $form_state['redirect'] = 'the-word';
+  drupal_set_message(t('Your message will be published after the moderator checks it.'));
 }
 
 function word_preprocess_node(&$vars) {
@@ -121,4 +206,25 @@ function word_preprocess_node(&$vars) {
       $vars['classes_array'] = array_merge($vars['classes_array'], $vars['elements']['#attributes']['class']);
     }
   }
+}
+
+function word_preprocess_page(&$vars) {
+
+  drupal_add_js(array(
+    'fb' => array('appId' => variable_get('fb_appid', 0)),
+    'vk' => array('appId' => variable_get('vk_app_id', 0)),
+  ), 'setting');
+  drupal_add_js('
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, \'script\', \'facebook-jssdk\'));
+   ', 'inline');
+
+  drupal_add_js('//vk.com/js/api/openapi.js', 'external');
+
+  drupal_add_js(drupal_get_path('module', 'word') . '/js/social.js');
 }

@@ -84,6 +84,11 @@ function word_ajax_word_page($nid, $limit) {
         $style = 'one';
       }
 
+      if (empty($node_render['#attributes']['class'])) {
+        $node_render['#attributes'] = array(
+          'class' => array(),
+        );
+      }
       $node_render['#attributes']['class'][] = 'style-' . $style;
       if (!is_numeric($nid)) continue;
       $response['items'][] = drupal_render($node_render);
@@ -92,5 +97,21 @@ function word_ajax_word_page($nid, $limit) {
     }
   }
 
+  print drupal_json_encode($response);
+}
+
+function word_ajax_avatar_save() {
+  $response = array('status' => 'ok');
+  $url = $_POST['url'];
+  $request = drupal_http_request($url);
+  if (!empty($request->data)) {
+    $file = file_save_data($request->data, 'public://avatars', FILE_EXISTS_RENAME);
+    // Unpublish file at once.
+    $file->status = 0;
+    file_save($file);
+    $response['fid'] = $file->fid;
+    $response['preview'] = image_style_url('card_thumb', $file->uri);
+    $response['token'] = drupal_get_token($file->fid);
+  }
   print drupal_json_encode($response);
 }
