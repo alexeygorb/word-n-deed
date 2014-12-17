@@ -128,7 +128,7 @@ function word_add_form_preview_after_build($element, &$form_state) {
     $file = file_load($form_state['values']['fid']);
     $image_path = image_style_url('card_thumb', $file->uri);
   }
-  $element['image']['#markup'] = '<img typeof="foaf:Image" src="' . $image_path .'" width="125" height="125" />';
+  $element['image']['#markup'] = '<img typeof="foaf:Image" src="' . $image_path .'" width="110" height="110" />';
 
   return $element;
 }
@@ -143,7 +143,7 @@ function word_upload_image($form, $form_state){
     $form['im-container']=array(
       '#prefix'=>'<div id="im-area">',
       'image' => array(
-        '#markup'=>'<img src="/sites/default/files/avatars/'.$file->filename.'" height="125" width="125" />',
+        '#markup'=>'<img src="/sites/default/files/avatars/'.$file->filename.'" height="110" width="110" />',
       ),
       'fid' => array(
         '#type' => 'hidden',
