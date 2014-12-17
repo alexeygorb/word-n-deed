@@ -61,7 +61,7 @@ function word_add_form($form, &$form_state) {
     '#markup' => '<h2>Постав аватар</h2>',
   );
   $form['im-container'] = array(
-    '#prefix' => '<div id="im-area">',
+    '#prefix' => '<div class="preview-wrapper"><div id="im-area">',
     'image' => array(
       '#markup' => '',
     ),
@@ -73,7 +73,7 @@ function word_add_form($form, &$form_state) {
       '#type' => 'hidden',
       '#default_value' => drupal_get_token('0'),
     ),
-    '#suffix' => '</div>',
+    '#suffix' => '</div></div>',
     '#after_build' => array('word_add_form_preview_after_build'),
   );
   $form['ava_source'] = array(
@@ -111,7 +111,8 @@ function word_add_form($form, &$form_state) {
 
   $form['text'] = array(
     '#type' => 'textarea',
-    '#description' => 'Залишилось символів: <span>' . variable_get('word_chars_limit', 200) . '</span>',
+    '#resizable' => FALSE,
+    '#description' => 'Залишилось символів: <span>' . variable_get('word_chars_limit', 150) . '</span>',
   );
 
   $form['submit'] = array(
@@ -192,7 +193,7 @@ function word_add_form_submit($form, $form_state) {
   $entity->title = drupal_substr($form_state['values']['text'], 0, 100);
   $entity->status = NODE_NOT_PUBLISHED;
   $entity->field_card_photo->set( array('fid' => $form_state['values']['fid']) );
-  $entity->field_text = drupal_substr($form_state['values']['text'], variable_get('word_chars_limit', 0, 200));
+  $entity->field_text = drupal_substr($form_state['values']['text'], 0, variable_get('word_chars_limit', 150));
   // Save the node.
   $entity->save();
 

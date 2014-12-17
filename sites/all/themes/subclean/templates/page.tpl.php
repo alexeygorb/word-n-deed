@@ -4,6 +4,10 @@
  * Default theme implementation to display a single Drupal page.
  */
 ?>
+<?php if (!empty($messages)): ?>
+  <div class="messages-modal"></div>
+  <div class="messages-wrapper"><div class="messages-inner"><?php print $messages; ?></div><a href="#" class="messages-close"><?php print t('Close'); ?></a></div>
+<?php endif; ?>
 <div id="page-wrapper">
   <div id="page">
     <div id="header">
@@ -42,8 +46,6 @@
         <?php print $breadcrumb; ?>
       </div>
     <?php endif; ?>
-
-    <?php print $messages; ?>
 
     <div id="main-wrapper">
       <div id="main" class="clearfix">

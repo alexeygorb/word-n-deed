@@ -3,3 +3,6 @@ description = Subclean
 base theme = clean
 core = 7.x
 stylesheets[all][] = css/style.css
+
+
+scripts[] = js/script.js

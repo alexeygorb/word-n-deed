@@ -10,8 +10,19 @@
         $('#cards-container-outer').css('width', config.colWidth * Drupal.wordCarousel.cols);
         Drupal.wordCarousel.loadNext();
 
-
+        $('.popup-container a.x').click(function(e) {
+          $(this).parents('.popup-container').fadeOut();
+        });
         // Other stuff.
+        $('#node-card-add a').live('click', function(e) {
+          e.preventDefault();
+          $('#add-form').fadeIn();
+        });
+
+        if ($('.messages-wrapper .error').length > 0) {
+          $('#add-form').show();
+        }
+
         $("#word-add-form #edit-file").change(function () {
           var file = $("#word-add-form #edit-file").val();
           if (file.length > 0) {
