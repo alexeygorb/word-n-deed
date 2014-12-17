@@ -71,7 +71,7 @@ function word_add_form($form, &$form_state) {
     ),
     'token' => array(
       '#type' => 'hidden',
-      '#default_value' => drupal_get_token('0'),
+      '#default_value' => '',
     ),
     '#suffix' => '</div></div>',
     '#after_build' => array('word_add_form_preview_after_build'),
@@ -154,7 +154,7 @@ function word_upload_image($form, $form_state){
       'token' => array(
         '#type' => 'hidden',
         '#name' => 'token',
-        '#value' => drupal_get_token($file->fid),
+        '#value' => word_get_token($file->fid),
       ),
       '#suffix'=>'</div>',
     );
@@ -171,7 +171,7 @@ function word_add_form_validate($form, &$form_state) {
     form_error($form['text'], t('Please enter the message for our soldiers'));
   }
   if (empty($form_state['values']['fid']) || empty($form_state['values']['token'])
-    || $form_state['values']['token'] !== drupal_get_token($form_state['values']['fid'])
+    || $form_state['values']['token'] !== word_get_token($form_state['values']['fid'])
   ) {
     form_error($form['im-container'], t('Please upload an image'));
   }
@@ -228,4 +228,8 @@ function word_preprocess_page(&$vars) {
   drupal_add_js('//vk.com/js/api/openapi.js', 'external');
 
   drupal_add_js(drupal_get_path('module', 'word') . '/js/social.js');
+}
+
+function word_get_token($value) {
+  return drupal_hmac_base64($value, drupal_get_private_key() . drupal_get_hash_salt());
 }
