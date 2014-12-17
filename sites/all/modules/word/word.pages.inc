@@ -5,6 +5,7 @@ function word_word_page() {
   $render = array();
   $render['content-wrapper'] = array(
     '#theme' => 'word_page',
+    '#add_form' => drupal_get_form('word_add_form'),
   );
 
   $path = drupal_get_path('module', 'word');

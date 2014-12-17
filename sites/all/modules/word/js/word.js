@@ -9,6 +9,16 @@
         Drupal.wordCarousel.init(config);
         $('#cards-container-outer').css('width', config.colWidth * Drupal.wordCarousel.cols);
         Drupal.wordCarousel.loadNext();
+
+
+        // Other stuff.
+        $("#word-add-form #edit-file").change(function () {
+          var file = $("#word-add-form #edit-file").val();
+          if (file.length > 0) {
+            $("#word-add-form #edit-upload").mousedown();
+            setTimeout(function() {$("#word-add-form #edit-file").attr('disabled', 'disabled');}, 300);
+          }
+        });
       }
     }
   };

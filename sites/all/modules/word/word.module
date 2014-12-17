@@ -35,7 +35,9 @@ function word_menu() {
 function word_theme() {
   return array(
     'word_page' => array(
-      'variables' => array(),
+      'variables' => array(
+        'add_form' => '',
+      ),
       'template' => 'word-page-contents',
     ),
     'word_add_word' => array(
@@ -43,6 +45,74 @@ function word_theme() {
       'template' => 'word-add-word',
     ),
   );
+}
+
+function word_add_form() {
+  $form = array();
+  $form['im-container'] = array(
+    '#prefix' => '<div id="im-area">',
+    'image' => array(
+      '#markup' => '<img typeof="foaf:Image" src="/' . drupal_get_path('module', 'word') . '/images/profile.jpg" width="125" height="125" />',
+    ),
+    'fid' => array(
+      '#type' => 'hidden',
+      '#default_value' => 0,
+    ),
+    '#suffix' => '</div>',
+  );
+  $form['file'] = array(
+    '#type' => 'file',
+    '#title' => t('Завантажити з комп’ютера'),
+  );
+  $form['upload'] = array(
+    '#type' => 'submit',
+    '#value' => t('Upload'),
+    '#executes_submit_callback' => FALSE,
+    '#ajax' => array(
+      'callback'=> 'word_upload_image',
+      'wrapper'=> 'im-area',
+      'method'=> 'replace',
+      'effect'=> 'fade',
+    ),
+  );
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Publish'),
+    // '#submit' => array('word_upload_image'),
+  );
+  return $form;
+}
+
+function word_upload_image($form, $form_state){
+
+  $file = file_save_upload('file', array('file_validate_extensions' => array('png gif jpg jpeg')), "public://avatars",$replace = FILE_EXISTS_REPLACE);
+  if ($file)
+  {
+    // $file->status=FILE_STATUS_PERMANENT;
+    file_save($file);
+    $form['im-container']=array(
+      '#prefix'=>'<div id="im-area">',
+      'image' => array(
+        '#markup'=>'<img src="/sites/default/files/avatars/'.$file->filename.'" height="125" width="125" />',
+      ),
+      'fid' => array(
+        '#type' => 'hidden',
+        '#name' => 'fid',
+        '#value' => $file->fid,
+      ),
+      '#suffix'=>'</div>',
+    );
+  }
+  else {
+    drupal_set_message('No file uploaded.');
+  }
+
+  return $form['im-container'];
+}
+
+function word_add_form_submit($form, $form_state) {
+  var_dump($form_state, $_FILES);
+  die();
 }
 
 function word_preprocess_node(&$vars) {
