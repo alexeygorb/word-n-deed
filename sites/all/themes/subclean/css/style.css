@@ -1,8 +1,85 @@
+@font-face {
+  font-family: 'intro';
+  src: url('font/intro-book/intro-book.eot');
+  src: url('font/intro-book/intro-book.otf') format("opentype");
+}
+
+@font-face {
+  font-family: 'intro';
+  src: url('font/intro-bold/intro-bold.eot');
+  src: url('font/intro-bold/intro-bold.otf') format("opentype");
+  font-weight: bold;
+}
+
+* {
+  font-family: 'intro' !important;
+}
+
 #page {
   font-size: inherit;
   width: auto;
   margin: 0;
 }
+
+#navigation {
+  height: 80px;
+}
+#navigation .section {
+  padding-top: 40px;
+  text-align: center;
+}
+
+#main-menu li {
+  font-weight: bold;
+  padding: 0 20px;
+  text-transform: uppercase;
+}
+#main-menu li a {
+  color: #000;
+}
+#main-menu li.active-trail {
+  background-image: url(../img/menu-item.png);
+  padding: 20px 0 14px;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+#main-menu li a.active-trail {
+  color: #e60700;
+  text-decoration: underline;
+}
+
+/* word, deed pages */
+.page-the-word h1,
+.page-the-word #logo img,
+.page-the-word #site-slogan
+.page-the-deed h1,
+.page-the-deed #logo img,
+.page-the-deed #site-slogan {
+   display: none;
+ }
+.page-the-word #header,
+.page-the-deed #header {
+  position: absolute;
+  top: 5px;
+  left: 40px;
+}
+.page-the-word #logo {
+  display: block;
+  height: 136px;
+  width: 255px;
+  background-image: url(../img/logo-word.png);
+}
+.page-the-deed #logo {
+  display: block;
+  height: 142px;
+  width: 249px;
+  background-image: url(../img/logo-deed.png);
+}
+.page-the-word #main,
+.page-the-deed #main {
+  background-color: lightgray;
+}
+/* End of word, deed pages */
 
 .node-teaser-card {
   width: 260px;
