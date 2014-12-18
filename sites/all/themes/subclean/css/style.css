@@ -15,14 +15,25 @@
   font-family: 'intro' !important;
 }
 
+body,html{height:100%;}
+
+#page-wrapper {
+  min-height: 100%;
+}
+
 #page {
   font-size: inherit;
   width: auto;
   margin: 0;
+  padding: 0;
 }
 
 #navigation {
   height: 80px;
+  position: relative;
+  z-index: 5;
+  width: 600px;
+  margin: 0 auto;
 }
 #navigation .section {
   padding-top: 40px;
@@ -37,6 +48,7 @@
 }
 #main-menu li a {
   color: #000;
+  text-decoration: none;
 }
 #main-menu li.active-trail {
   background-image: url(../img/menu-item.png);
@@ -50,6 +62,14 @@
   text-decoration: underline;
 }
 
+a, a:link, a:active, a:visited {
+  color: white;
+  text-decoration: underline;
+}
+a:hover {
+  text-decoration: none;
+}
+
 /* word, deed pages */
 .page-the-word h1,
 .page-the-word #logo img,
@@ -59,13 +79,49 @@
 .page-the-deed #site-slogan {
    display: none;
  }
-.page-the-word #header,
-.page-the-deed #header {
+
+#header {
   position: absolute;
-  top: 5px;
-  left: 40px;
-  width: 300px;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 5px 0 0 40px;
+  background: white;
+  height: 75px;
 }
+
+#block-menu-menu-social {
+  position: absolute;
+  top: 22px;
+  right: 67px;
+}
+
+#block-menu-menu-social ul,
+#block-menu-menu-social li {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+#block-menu-menu-social li {
+  display: inline-block;
+}
+
+#block-menu-menu-social li a {
+  display: block;
+  background: url('../img/socials.png') no-repeat scroll -27px 0;
+  height: 30px;
+  width: 30px;
+  text-indent: -9999px;
+  outline: none;
+
+}
+#block-menu-menu-social li.first a {
+  background-position: 0 0;
+}
+#block-menu-menu-social li.last a {
+  background-position: -58px 0;
+}
+
 .page-the-word #logo {
   display: block;
   height: 136px;
@@ -95,9 +151,57 @@
   background-size: cover;
 }
 
+body.front {
+  background: url('../img/front-bg.jpg') no-repeat scroll 65% 30%;
+}
+
+body.front #page-wrapper {
+  background: url('../img/bottom-tile.png') repeat-x scroll center bottom;
+}
+
+body.front #main-wrapper {
+  width: 560px;
+  height: 670px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -335px;
+  margin-left: -280px;
+}
+
+body.front .node-page {
+  text-align: center;
+  margin: 0;
+}
+
+body.front .node-page {
+  color: white;
+  font-family: Arial;
+  font-size: 20px;
+  line-height: 23px;
+}
+
+body.front .node-page p:first-child {
+  margin-bottom: 5px;
+}
+body.front .node-page p {
+  margin-bottom: 0;
+}
+body.front .node-page p a {
+  display: inline-block;
+  border: 2px solid #eeeff6;
+  font-family: intro;
+  font-weight: bold;
+  padding: 2px 7px;
+  margin-top: 15px;
+  font-size: 18px;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
 .node-teaser-card {
   width: 260px;
-  height: 350px;
+  height: 455px;
   overflow: hidden;
 }
 
@@ -176,7 +280,7 @@
   width: 229px;
   height: 259px;
 }
-#word-add-form .form-type-file {
+#add-form form .form-type-file {
   display: inline-block;
   vertical-align: bottom;
 }
@@ -184,7 +288,7 @@
   text-align: center;
   margin-bottom: 51px;
 }
-#word-add-form .form-type-file label {
+#add-form form .form-type-file label {
   cursor: pointer;
   padding: 6px 21px 5px;
   line-height: 24px;
@@ -221,12 +325,12 @@
   /*clear: both;*/
 /*}*/
 
-#word-add-form .form-item-files-file {
+#add-form form .form-item-files-file {
   position: relative;
   overflow: hidden;
   margin: 0;
 }
-#word-add-form .form-item-files-file input {
+#add-form form .form-item-files-file input {
   position: absolute;
   top: 0;
   right: 0;
@@ -237,10 +341,10 @@
   opacity: 0;
   filter: alpha(opacity=0);
 }
-#word-add-form .form-item-text {
+#add-form form .form-item-text {
   margin: 26px 0 32px;
 }
-#word-add-form .form-item-text textarea {
+#add-form form .form-item-text textarea {
   font-family: Arial;
   font-size: 14px;
   color: white;
@@ -250,14 +354,14 @@
   height: 87px;
   margin: 0 auto;
 }
-#word-add-form .form-item-text .description {
+#add-form form .form-item-text .description {
   font-size: 13px;
   font-family: Arial;
   color: #676767;
   text-align: center;
   padding-top: 5px;
 }
-#word-add-form #edit-submit {
+#add-form form #edit-submit {
   margin: 0 auto;
   cursor: pointer;
   padding: 6px 21px 5px;
@@ -272,8 +376,8 @@
   outline: none;
   display: block;
 }
-#word-add-form #edit-upload { display: none; }
-#word-add-form .ajax-progress {display: none; }
+#add-form form #edit-upload { display: none; }
+#add-form form .ajax-progress {display: none; }
 
 .messages-modal {
   width: 100%;

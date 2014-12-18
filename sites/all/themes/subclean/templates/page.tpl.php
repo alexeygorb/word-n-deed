@@ -12,7 +12,7 @@
   <div id="page">
     <div id="header">
       <div class="section clearfix">
-        <?php if ($logo): ?>
+        <?php if (!$is_front && $logo): ?>
           <?php print render($page['logo']) ?>
         <?php endif; ?>
 
@@ -67,12 +67,12 @@
             <a id="main-content"></a>
 
             <?php print render($title_prefix); ?>
-            <?php if ($title): ?>
+            <?php if (!$is_front && $title): ?>
               <h1 class="title" id="page-title"><?php print $title; ?></h1>
             <?php endif; ?>
             <?php print render($title_suffix); ?>
 
-            <?php if ($tabs): ?>
+            <?php if (FALSE && $tabs): ?>
               <div class="tabs">
                 <?php print render($tabs); ?>
               </div>

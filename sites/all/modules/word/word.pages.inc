@@ -13,7 +13,7 @@ function word_word_page() {
     'data' => array('pageSetup' => array(
       'reserveY' => 130,
       'reserveX' => 20,
-      'rowHeight' => 350,
+      'rowHeight' => 455,
       'colWidth' => 260,
       'ajaxHandler' => url('ajax/word'),
       'pagesIncrement' => 3,
@@ -111,7 +111,7 @@ function word_ajax_avatar_save() {
     file_save($file);
     $response['fid'] = $file->fid;
     $response['preview'] = image_style_url('card_thumb', $file->uri);
-    $response['token'] = drupal_get_token($file->fid);
+    $response['token'] = word_get_token($file->fid);
   }
   print drupal_json_encode($response);
 }
