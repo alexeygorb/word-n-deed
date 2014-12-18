@@ -73,7 +73,7 @@ a:hover {
 /* word, deed pages */
 .page-the-word h1,
 .page-the-word #logo img,
-.page-the-word #site-slogan
+.page-the-word #site-slogan,
 .page-the-deed h1,
 .page-the-deed #logo img,
 .page-the-deed #site-slogan {
@@ -199,15 +199,74 @@ body.front .node-page p a {
   text-transform: uppercase;
 }
 
-.node-teaser-card {
-  width: 260px;
-  height: 455px;
+#cards-container-inner .node-teaser-card {
+  width: 200px;
+  height: 350px;
+  padding-top: 110px;
+  padding-right: 44px;
   overflow: hidden;
+  background: url(../img/list-separator.png) no-repeat right 66px;
 }
 
+#cards-container-inner {
+  color: #fff;
+}
 #cards-container-inner .column {
   width: 260px;
   float: left;
+}
+
+#cards-container-inner .diamond {
+  height: 252px;
+  width: 200px;
+  top: -176px;
+  position: relative;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+#cards-container-inner .style-one .diamond {
+  background-image: url(../img/list-item-1.png);
+}
+#cards-container-inner .style-two .diamond {
+  background-image: url(../img/list-item-2.png);
+  background-position: center 8px;
+}
+#cards-container-inner #node-card-add .diamond {
+  background-image: url(../img/list-item-0.png);
+}
+
+#cards-container-inner #node-card-add a {
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+#cards-container-inner .field-type-text-long {
+  padding-top: 10px;
+}
+#cards-container-inner #node-card-add .field-type-text-long {
+  width: 100px;
+  margin: 0 auto;
+  border: 1px solid #fff;
+  top: 15px;
+  position: relative;
+  padding: 6px;
+}
+
+#cards-container-inner .field-name-field-card-photo .field-item,
+#cards-container-inner .field-name-field-text,
+#cards-container-inner .submitted {
+  text-align: center;
+}
+#cards-container-inner .submitted {
+  padding-top: 0;
+  text-decoration: underline;
+}
+#cards-container-inner .field-name-field-card-photo .field-item img {
+  border-radius: 55px;
+}
+#cards-container-inner .field-name-field-card-photo {
+  height: 200px;
 }
 
 .popup-container {
@@ -300,30 +359,6 @@ body.front .node-page p a {
   text-transform: uppercase;
   font-size: 18px;
 }
-/*.field-name-field-card-photo .field-item {*/
-  /*-webkit-transform: rotate(-45deg);*/
-  /*-moz-transform: rotate(-45deg);*/
-  /*transform: rotate(-45deg);*/
-  /*float: left;*/
-  /*margin: 40px 0 34px 59px;*/
-  /*overflow: hidden;*/
-  /*border-radius: 0px;*/
-/*}*/
-/*.field-name-field-card-photo .field-item img {*/
-  /*-webkit-transform: rotate(45deg) scale(1.5);*/
-  /*-moz-transform: rotate(45deg) scale(1.5);*/
-  /*transform: rotate(45deg) scale(1.5);*/
-  /*-webkit-transform: rotate(45deg);*/
-  /*-moz-transform: rotate(45deg);*/
-  /*transform: rotate(45deg);*/
-  /*float: left;*/
-  /*-webkit-backface-visibility: hidden;*/
-  /*-moz-backface-visibility: hidden;*/
-  /*backface-visibility: hidden;*/
-/*}*/
-/*.node-teaser-card .node-content .submitted {*/
-  /*clear: both;*/
-/*}*/
 
 #add-form form .form-item-files-file {
   position: relative;
