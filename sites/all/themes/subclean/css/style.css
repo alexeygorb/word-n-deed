@@ -31,7 +31,8 @@
 
 #main-menu li {
   font-weight: bold;
-  padding: 0 20px;
+  padding-left: 20px;
+  padding-right: 20px;
   text-transform: uppercase;
 }
 #main-menu li a {
@@ -39,7 +40,8 @@
 }
 #main-menu li.active-trail {
   background-image: url(../img/menu-item.png);
-  padding: 20px 0 14px;
+  padding-top: 20px;
+  padding-bottom: 14px;
   background-position: center;
   background-repeat: no-repeat;
 }
@@ -62,6 +64,7 @@
   position: absolute;
   top: 5px;
   left: 40px;
+  width: 300px;
 }
 .page-the-word #logo {
   display: block;
@@ -74,12 +77,23 @@
   height: 142px;
   width: 249px;
   background-image: url(../img/logo-deed.png);
+  background-repeat: no-repeat;
 }
 .page-the-word #main,
 .page-the-deed #main {
   background-color: lightgray;
 }
 /* End of word, deed pages */
+.page-the-word #main {
+  background-color: #30509b;
+  background-image: url(../img/bg-word.jpg);
+  background-position: center center;
+  background-repeat: no-repeat;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
 
 .node-teaser-card {
   width: 260px;
@@ -182,6 +196,31 @@
   text-transform: uppercase;
   font-size: 18px;
 }
+/*.field-name-field-card-photo .field-item {*/
+  /*-webkit-transform: rotate(-45deg);*/
+  /*-moz-transform: rotate(-45deg);*/
+  /*transform: rotate(-45deg);*/
+  /*float: left;*/
+  /*margin: 40px 0 34px 59px;*/
+  /*overflow: hidden;*/
+  /*border-radius: 0px;*/
+/*}*/
+/*.field-name-field-card-photo .field-item img {*/
+  /*-webkit-transform: rotate(45deg) scale(1.5);*/
+  /*-moz-transform: rotate(45deg) scale(1.5);*/
+  /*transform: rotate(45deg) scale(1.5);*/
+  /*-webkit-transform: rotate(45deg);*/
+  /*-moz-transform: rotate(45deg);*/
+  /*transform: rotate(45deg);*/
+  /*float: left;*/
+  /*-webkit-backface-visibility: hidden;*/
+  /*-moz-backface-visibility: hidden;*/
+  /*backface-visibility: hidden;*/
+/*}*/
+/*.node-teaser-card .node-content .submitted {*/
+  /*clear: both;*/
+/*}*/
+
 #word-add-form .form-item-files-file {
   position: relative;
   overflow: hidden;
@@ -293,3 +332,10 @@ a.messages-close {
   font-weight: bold;
   font-size: 13px;
 }
+
+/* Debug mode */
+/*.messages-modal,*/
+/*.messages-wrapper,*/
+/*#add-form {*/
+  /*display: none !important;*/
+/*}*/
