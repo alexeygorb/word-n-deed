@@ -4,8 +4,8 @@
 </div>
 <div id="add-hint" class="popup-container">
   <div class="content-wrapper">
-    <p>Подаруй душевне тепло</p>
-    <p class="bold-line">Напиши кілька добрих слів</p>
+    <p>Подаруй душевне тепло -</p>
+    <p class="bold-line">напиши кілька добрих слів</p>
     <p>воякові на передовій.</p>
     <a class="x" href="#">Закрити</a>
   </div>

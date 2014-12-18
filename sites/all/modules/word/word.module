@@ -76,7 +76,7 @@ function word_add_form($form, &$form_state) {
 
   $form = array();
   $form['header'] = array(
-    '#markup' => '<h2>Постав аватар</h2>',
+    '#markup' => '<h2>Авторизуйся</h2><div class="social-login"><a href="#" id="fb-login-image">FB</a><a href="#" id="vk-login-image">VK</a></div>',
   );
   $form['im-container'] = array(
     '#prefix' => '<div class="preview-wrapper"><div id="im-area">',
@@ -104,7 +104,7 @@ function word_add_form($form, &$form_state) {
   );
   $form['ava_source']['file'] = array(
     '#type' => 'file',
-    '#title' => t('Завантажити з комп’ютера'),
+    '#title' => 'Змінити фото',
   );
 
   $form['ava_source']['upload'] = array(
@@ -119,9 +119,6 @@ function word_add_form($form, &$form_state) {
       'effect'=> 'fade',
     ),
   );
-  $form['ava_source']['alt'] = array(
-    '#markup' => '<h4>або з соцмережі:</h4><a href="#" id="fb-login-image">FB</a><a href="#" id="vk-login-image">VK</a>'
-  );
 
   $form['header2'] = array(
     '#markup' => '<h3>Напиши кілька теплих слів солдатам</h3>',
@@ -131,6 +128,15 @@ function word_add_form($form, &$form_state) {
     '#type' => 'textarea',
     '#resizable' => FALSE,
     '#description' => 'Залишилось символів: <span>' . variable_get('word_chars_limit', 150) . '</span>',
+  );
+
+  $form['social'] = array(
+    '#type' => 'hidden',
+    '#default_value' => '',
+  );
+  $form['social_id'] = array(
+    '#type' => 'hidden',
+    '#default_value' => '',
   );
 
   $form['submit'] = array(
@@ -210,7 +216,9 @@ function word_add_form_submit($form, $form_state) {
   $text = $form_state['values']['text'];
   $entity->title = drupal_substr($text, 0, 100);
   $entity->status = NODE_NOT_PUBLISHED;
-  $entity->field_card_photo->set( array('fid' => $form_state['values']['fid']) );
+  $entity->field_card_photo->set(array('fid' => $form_state['values']['fid']));
+  $entity->field_social->set($form_state['values']['social']);
+  $entity->field_social_id->set($form_state['values']['social_id']);
   $entity->field_text = drupal_substr($text, 0, variable_get('word_chars_limit', 150));
   // Save the node.
   $entity->save();
@@ -228,6 +236,7 @@ function word_preprocess_node(&$vars) {
 }
 
 function word_preprocess_page(&$vars) {
+  drupal_add_js(drupal_get_path('module', 'word') . '/js/jquery.cookie.js');
 
   drupal_add_js(array(
     'fb' => array('appId' => variable_get('fb_appid', 0)),

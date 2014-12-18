@@ -70,6 +70,9 @@ a:hover {
   text-decoration: none;
 }
 
+#block-system-main {
+  margin-bottom: 0;
+}
 /* word, deed pages */
 .page-the-word h1,
 .page-the-word #logo img,
@@ -157,11 +160,11 @@ body.front #page-wrapper {
 
 body.front #main-wrapper {
   width: 560px;
-  height: 670px;
+  height: 700px;
   position: absolute;
   top: 50%;
   left: 50%;
-  margin-top: -335px;
+  margin-top: -360px;
   margin-left: -280px;
 }
 
@@ -183,17 +186,30 @@ body.front .node-page p:first-child {
 body.front .node-page p {
   margin-bottom: 0;
 }
-body.front .node-page p a,
+
+body.front .node-page .actions a,
 #spalnik-container .form-trigger {
   display: inline-block;
   border: 2px solid #eeeff6;
   font-family: intro;
   font-weight: bold;
   padding: 2px 7px;
-  margin-top: 15px;
+  margin-top: 72px;
   font-size: 18px;
   text-decoration: none;
   text-transform: uppercase;
+}
+
+body.front .node-page .actions a {
+  margin-right: 20px;
+  margin-left: 20px;
+}
+body.front .node-page .actions a:first-child {
+  margin-left: 4px;
+}
+
+body.front .node-page .actions {
+  background: url('../img/warm-bg.png') no-repeat scroll center top ;
 }
 
 body.page-the-deed {
@@ -241,13 +257,13 @@ body.page-the-deed #page {
   line-height: 24px;
 }
 
-#cards-container-inner .node-teaser-card {
+.node-teaser-card {
   width: 200px;
-  height: 360px;
-  padding-top: 100px;
+  height: 320px;
+  padding-top: 85px;
   padding-right: 44px;
   overflow: hidden;
-  background: url(../img/list-separator.png) no-repeat right 56px;
+  background: url(../img/list-separator.png) no-repeat right 41px;
   margin-bottom: 0;
 }
 
@@ -259,7 +275,7 @@ body.page-the-deed #page {
   float: left;
 }
 
-#cards-container-inner .diamond,
+.node-teaser-card .diamond,
 .preview-wrapper .diamond  {
   height: 254px;
   width: 200px;
@@ -268,58 +284,57 @@ body.page-the-deed #page {
   background-repeat: no-repeat;
   background-position: center;
 }
-#cards-container-inner .style-one .diamond {
+.style-one .diamond {
   background-image: url(../img/list-item-1.png);
 }
-#cards-container-inner .style-two .diamond {
+.style-two .diamond {
   background-image: url(../img/list-item-2.png);
   background-position: center 8px;
 }
-#cards-container-inner #node-card-add .diamond,
+#node-card-add .diamond,
 .preview-wrapper .diamond {
   background-image: url(../img/list-item-0.png);
 }
 
-#cards-container-inner #node-card-add a {
-  color: #fff;
+#node-card-add a {
+  color: #eeeff6;
   text-transform: uppercase;
   font-weight: bold;
+  text-decoration: none;
+  display: inline-block;
+  width: 100px;
+  border: 2px solid #eeeff6;
+  margin-top: 2px;
+  padding: 6px;
 }
 
-#cards-container-inner .field-type-text-long {
+.node-teaser-card .field-type-text-long {
   padding-top: 10px;
   font-family: Arial;
   font-size: 16px;
 }
-#cards-container-inner .field-type-text-long .field-item {
+.node-teaser-card .field-type-text-long .field-item {
   font-family: Arial;
-}
-#cards-container-inner #node-card-add .field-type-text-long {
-  width: 100px;
-  margin: 0 auto;
-  border: 1px solid #fff;
-  top: 15px;
-  position: relative;
-  padding: 6px;
+  font-size: 13px;
 }
 
-#cards-container-inner .field-name-field-card-photo .field-item,
-#cards-container-inner .field-name-field-text,
-#cards-container-inner .submitted {
+.node-teaser-card .field-name-field-card-photo .field-item,
+.node-teaser-card .field-name-field-text,
+.node-teaser-card .submitted {
   text-align: center;
 }
-#cards-container-inner .submitted {
+.node-teaser-card .submitted {
   padding-top: 0;
   text-decoration: underline;
 }
 .preview-wrapper img,
-#cards-container-inner .field-name-field-card-photo .field-item img {
+.node-teaser-card .field-name-field-card-photo .field-item img {
   border-radius: 55px;
 }
 .preview-wrapper img {
   margin-top: 62px;
 }
-#cards-container-inner .field-name-field-card-photo {
+.node-teaser-card .field-name-field-card-photo {
   height: 200px;
 }
 
@@ -331,6 +346,49 @@ body.page-the-deed #page {
   bottom: 0;
   right: 0;
   z-index: 10;
+}
+
+#add-hint {
+  background: rgba(0, 0, 0, 0.85);
+}
+
+#add-hint .x {
+  color: white;
+  text-decoration: underline;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 16px;
+  margin-top: 25px;
+  display: inline-block;
+}
+
+#add-hint .content-wrapper {
+  width: 650px;
+  height: 230px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -325px;
+  margin-top: -115px;
+  text-align: center;
+}
+
+#add-hint .content-wrapper p {
+  font-size: 30px;
+  color: white;
+  text-transform: uppercase;
+  margin: 0;
+  line-height: 50px;
+}
+#add-hint .content-wrapper p.bold-line {
+  color: #fff4c0;
+  font-weight: bold;
+}
+
+#node-card-add.highlight {
+  position: absolute;
+  background: none;
+  text-align: center;
 }
 
 #add-form {
@@ -374,6 +432,10 @@ body.page-the-deed #page {
   vertical-align: bottom;
   margin: 0 53px -2px 41px;
 }
+.social-login {
+  text-align: center;
+  margin-bottom: 10px;
+}
 #fb-login-image, #vk-login-image {
   display: inline-block;
   background: url('../img/fb-link.png') no-repeat scroll 0 0;
@@ -398,20 +460,22 @@ body.page-the-deed #page {
   vertical-align: bottom;
 }
 .ava-source-container {
-  text-align: center;
-  margin-bottom: 51px;
+  text-align: right;
+  /* width: 85px; */
+  position: relative;
+  top: -124px;
+  right: 149px;
 }
 #add-form form .form-type-file label {
   cursor: pointer;
-  padding: 6px 21px 5px;
-  line-height: 24px;
+  line-height: 20px;
   color: white;
-  border: 2px solid #eeeff6;
-  width: 147px;
+  text-decoration: underline;
+  width: 85px;
   margin: 0;
   text-align: center;
   text-transform: uppercase;
-  font-size: 18px;
+  font-size: 16px;
 }
 
 #add-form form .form-item-files-file {
@@ -633,3 +697,25 @@ a.messages-close {
 /*#add-form {*/
   /*display: none !important;*/
 /*}*/
+
+@media (max-height: 860px) {
+  body.front #main-wrapper .field-name-body img {
+    width: 237px;
+    height: 246px;
+  }
+
+  body.front .node-page {
+    font-size: 16px;
+  }
+
+  body.front #main-wrapper {
+    width: 560px;
+    height: 460px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -225px;
+    margin-left: -280px;
+  }
+
+}

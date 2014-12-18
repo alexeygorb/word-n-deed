@@ -6,16 +6,43 @@
       var once = $('#cards-container-outer').once('word');
       if (once.length > 0) {
 
+        config.loadCallback = function() {
+          $('#cards-container-outer').once('hint').each(function() {
+            // Check for cookie.
+            var hint = $.cookie('hint');
+            if (!hint) {
+              $('#add-hint').fadeIn();
+              var element = $('#node-card-add');
+              var p = element.offset();
+              var copy = element.clone();
+              copy.addClass('highlight');
+              copy.css({
+                left: p.left,
+                top: p.top
+              });
+              copy.appendTo($('#add-hint'));
+
+              $('#add-hint a.x').click(function(e) {
+                e.preventDefault();
+                copy.fadeOut(400, function() {copy.remove();});
+                $.cookie('hint', '1', { expires: 14, path: '/' });
+              });
+            }
+          });
+
+        };
         Drupal.wordCarousel.init(config);
         $('#cards-container-outer').css('width', config.colWidth * Drupal.wordCarousel.cols);
         Drupal.wordCarousel.loadNext();
 
         $('.popup-container a.x').click(function(e) {
+          e.preventDefault();
           $(this).parents('.popup-container').fadeOut();
         });
         // Other stuff.
         $('#node-card-add a').live('click', function(e) {
           e.preventDefault();
+          $('#add-hint a.x').click();
           $('#add-form').fadeIn();
         });
 
@@ -55,6 +82,7 @@
   };
 
   Drupal.wordCarousel = {
+    config: {},
     offset: 0,
     limit: 0,
     rows: 1,
@@ -119,12 +147,17 @@
 
             // Reset the lock.
             self.lock = false;
+
+            if (self.config.loadCallback) {
+              self.config.loadCallback();
+            }
           }
         });
       }
     },
     init: function(config) {
       var self = this;
+      self.config = config;
       // Calculate the initial setup.
       var windowHeight = $(window).height();
       var windowWidth = $(window).width();
@@ -156,6 +189,7 @@
         longSwipesRatio: 0.3,
         createPagination: false,
         speed: 800,
+        mousewheelControl: true,
         onSlideChangeStart: function(swiper, direction) { self.onSlideChange(swiper, direction); }
       });
     },

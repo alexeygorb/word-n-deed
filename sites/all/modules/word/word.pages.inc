@@ -13,7 +13,7 @@ function word_word_page() {
     'data' => array('pageSetup' => array(
       'reserveY' => 120,
       'reserveX' => 20,
-      'rowHeight' => 455,
+      'rowHeight' => 405,
       'colWidth' => 260,
       'ajaxHandler' => url('ajax/word'),
       'pagesIncrement' => 3,

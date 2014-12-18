@@ -20,9 +20,9 @@
   Drupal.FB.login = false;
 
   Drupal.FB.getImage = function() {
-    console.log('getImage');
+    //console.log('getImage');
     FB.api('/me/picture', {type: 'large', redirect: false}, function(r) {
-      console.log('picture', r);
+      //console.log('picture', r);
       if (r.data != undefined && r.data.url != undefined) {
         updateForm(r.data.url);
       }
@@ -47,14 +47,19 @@
       $('body').once('socials').each(function() {
         $('#fb-login-image').click(function(e) {
           e.preventDefault();
-          console.log(Drupal.FB.login);
+          //console.log(Drupal.FB.login);
           if (Drupal.FB.login && Drupal.FB.login.status == 'connected') {
+            //console.log('existing', Drupal.FB.login);
+            $('#add-form form input[name=social]').val('facebook');
+            $('#add-form form input[name=social_id]').val(Drupal.FB.login.authResponse.userID);
             Drupal.FB.getImage();
           }
           else {
             FB.login(function (r) {
-              console.log('auth', r);
+              //console.log('auth', r);
               if (r.authResponse) {
+                $('#add-form form input[name=social]').val('facebook');
+                $('#add-form form input[name=social_id]').val(r.authResponse.userID);
                 Drupal.FB.getImage();
               }
             });
@@ -72,9 +77,11 @@
         });
 
         function authInfo(response) {
-          console.log(response);
+          //console.log(response);
           var uid = response.session.user.id;
-          console.log(uid);
+          //console.log(uid);
+          $('#add-form form input[name=social]').val('vkontakte');
+          $('#add-form form input[name=social_id]').val(uid);
           VK.Api.call('users.get', {
             user_ids: uid,
             fields: 'photo_200'
