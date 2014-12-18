@@ -1,21 +1,5 @@
 <?php
 
-$databases = array (
-  'default' => 
-  array (
-    'default' => 
-    array (
-      'database' => 'word-ato',
-      'username' => 'word-ato',
-      'password' => 'dWpTs9bddW89Ya3u',
-      'host' => 'localhost',
-      'port' => '',
-      'driver' => 'mysql',
-      'prefix' => '',
-    ),
-  ),
-);
-
 $update_free_access = FALSE;
 
 $drupal_hash_salt = 'ddYth6h0WyCezfWXmjKKxJY6iRKyERAtdNqTWW90L0I';
@@ -44,14 +28,48 @@ $conf['vk_app_id'] = '4684920';
 $conf['vk_secret'] = 'Xudnb5hyz3UgNReu286q';
 
 if ($conf['environment'] == 'test') {
-  $conf['fb_appid'] = '1566203040283717';
-  $conf['fb_secret'] = '6848e4dfca191408216fe7e97d826c18';
+
+  $databases = array (
+    'default' =>
+      array (
+        'default' =>
+          array (
+            'database' => 'word-ato',
+            'username' => 'word-ato',
+            'password' => 'dWpTs9bddW89Ya3u',
+            'host' => 'localhost',
+            'port' => '',
+            'driver' => 'mysql',
+            'prefix' => '',
+          ),
+      ),
+  );
+
+  $conf['fb_appid'] = '1566722923565062';
+  $conf['fb_secret'] = 'bb436e6007dc195c93580482814926cc';
 
   $conf['liqpay_public_key'] = 'i14278414934';
   $conf['liqpay_private_key'] = 'AX9rk3Rxc4FUIGCNFssLj7MiyXEskR9GjUvcmzMO';
 }
 
 if ($conf['environment'] == 'prod') {
+
+  $databases = array (
+    'default' =>
+      array (
+        'default' =>
+          array (
+            'database' => 'word-ato-prod',
+            'username' => 'word-ato-prod',
+            'password' => 'XNYwac6JGaB7DYn8',
+            'host' => 'localhost',
+            'port' => '',
+            'driver' => 'mysql',
+            'prefix' => '',
+          ),
+      ),
+  );
+
   $conf['fb_appid'] = '1566203040283717';
   $conf['fb_secret'] = '6848e4dfca191408216fe7e97d826c18';
 
