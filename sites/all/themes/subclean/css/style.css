@@ -200,6 +200,10 @@ body.front .node-page .actions a,
   text-transform: uppercase;
 }
 
+#spalnik-container .form-trigger {
+  margin-top: 5px;
+}
+
 body.front .node-page .actions a {
   margin-right: 20px;
   margin-left: 20px;
