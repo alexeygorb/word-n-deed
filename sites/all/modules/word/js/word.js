@@ -137,6 +137,12 @@
         self.cols = 1;
       }
 
+      var delta = windowHeight - config.reserveY - config.rowHeight * self.rows;
+      if (delta > 0) {
+        $('#cards-container-outer').css({'margin-top': Math.floor(delta / 2)});
+      }
+
+
       self.limit = self.rows * self.cols * config.pagesIncrement;
       self.pageCapacity = self.limit / config.pagesIncrement;
 

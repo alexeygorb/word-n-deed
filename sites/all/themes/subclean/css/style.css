@@ -11,8 +11,8 @@
   font-weight: bold;
 }
 
-* {
-  font-family: 'intro' !important;
+body {
+  font-family: 'intro';
 }
 
 body,html{height:100%;}
@@ -85,9 +85,9 @@ a:hover {
   top: 0;
   left: 0;
   right: 0;
-  padding: 5px 0 0 40px;
+  padding: 0 0 0 40px;
   background: white;
-  height: 75px;
+  height: 80px;
 }
 
 #block-menu-menu-social {
@@ -126,21 +126,17 @@ a:hover {
   display: block;
   height: 136px;
   width: 255px;
-  background-image: url(../img/logo-word.png);
+  background: url(../img/logo-word.png) no-repeat scroll 0 0;
 }
 .page-the-deed #logo {
   display: block;
   height: 142px;
   width: 249px;
-  background-image: url(../img/logo-deed.png);
-  background-repeat: no-repeat;
+  background: url(../img/logo-deed.png) no-repeat scroll 0 0;
 }
-.page-the-word #main,
-.page-the-deed #main {
-  background-color: lightgray;
-}
+
 /* End of word, deed pages */
-.page-the-word #main {
+body.page-the-word {
   background-color: #30509b;
   background-image: url(../img/bg-word.jpg);
   background-position: center center;
@@ -187,7 +183,8 @@ body.front .node-page p:first-child {
 body.front .node-page p {
   margin-bottom: 0;
 }
-body.front .node-page p a {
+body.front .node-page p a,
+#spalnik-container .form-trigger {
   display: inline-block;
   border: 2px solid #eeeff6;
   font-family: intro;
@@ -199,13 +196,59 @@ body.front .node-page p a {
   text-transform: uppercase;
 }
 
+body.page-the-deed {
+  background: url('../img/bg-snow.jpg') no-repeat scroll center center;
+  background-size: 100% auto;
+}
+
+body.page-the-deed #page-wrapper {
+  background: url('../img/spalnik.png') no-repeat scroll center center;
+}
+
+body.page-the-deed #page {
+  background: url('../img/bottom-tile2.png') repeat-x scroll center bottom;
+}
+
+#spalnik-container {
+  width: 516px;
+  height: 316px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-left: -258px;
+  margin-top: -178px;
+  color: #eeeff6;
+  text-align: center;
+}
+
+#spalnik-container h2 {
+  font-size: 50px;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 0;
+}
+
+#spalnik-container h3 {
+  font-size: 50px;
+  font-weight: normal;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+#spalnik-container p {
+  font-family: Arial;
+  font-size: 20px;
+  line-height: 24px;
+}
+
 #cards-container-inner .node-teaser-card {
   width: 200px;
-  height: 350px;
-  padding-top: 110px;
+  height: 360px;
+  padding-top: 100px;
   padding-right: 44px;
   overflow: hidden;
-  background: url(../img/list-separator.png) no-repeat right 66px;
+  background: url(../img/list-separator.png) no-repeat right 56px;
+  margin-bottom: 0;
 }
 
 #cards-container-inner {
@@ -216,8 +259,9 @@ body.front .node-page p a {
   float: left;
 }
 
-#cards-container-inner .diamond {
-  height: 252px;
+#cards-container-inner .diamond,
+.preview-wrapper .diamond  {
+  height: 254px;
   width: 200px;
   top: -176px;
   position: relative;
@@ -231,7 +275,8 @@ body.front .node-page p a {
   background-image: url(../img/list-item-2.png);
   background-position: center 8px;
 }
-#cards-container-inner #node-card-add .diamond {
+#cards-container-inner #node-card-add .diamond,
+.preview-wrapper .diamond {
   background-image: url(../img/list-item-0.png);
 }
 
@@ -243,6 +288,11 @@ body.front .node-page p a {
 
 #cards-container-inner .field-type-text-long {
   padding-top: 10px;
+  font-family: Arial;
+  font-size: 16px;
+}
+#cards-container-inner .field-type-text-long .field-item {
+  font-family: Arial;
 }
 #cards-container-inner #node-card-add .field-type-text-long {
   width: 100px;
@@ -262,8 +312,12 @@ body.front .node-page p a {
   padding-top: 0;
   text-decoration: underline;
 }
+.preview-wrapper img,
 #cards-container-inner .field-name-field-card-photo .field-item img {
   border-radius: 55px;
+}
+.preview-wrapper img {
+  margin-top: 62px;
 }
 #cards-container-inner .field-name-field-card-photo {
   height: 200px;
@@ -335,9 +389,9 @@ body.front .node-page p a {
 }
 #add-form .preview-wrapper {
   margin: 0 auto -36px auto;
-  background: url('../img/avatar-add-mask.png') no-repeat scroll 0 0;
-  width: 229px;
+  width: 200px;
   height: 259px;
+  text-align: center;
 }
 #add-form form .form-type-file {
   display: inline-block;
@@ -413,6 +467,107 @@ body.front .node-page p a {
 }
 #add-form form #edit-upload { display: none; }
 #add-form form .ajax-progress {display: none; }
+
+
+#pay-form {
+  background: url('../img/popup-pay-bg.png') repeat scroll 50% 50%;
+  text-align: center;
+}
+
+#pay-form .x {
+  position: absolute;
+  color: black;
+  text-decoration: underline;
+  text-transform: uppercase;
+  right: 37px;
+  top: 29px;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+#pay-form .content-wrapper {
+  width: 684px;
+  height: 590px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -295px;
+  margin-left: -343px;
+  font-family: Arial;
+}
+
+#pay-form .content-wrapper p {
+  padding: 10px 90px 0;
+  font-size: 20px;
+  line-height: 23px;
+  margin-bottom: 50px;
+}
+
+#pay-form .content-wrapper .rule {
+  background: url('../img/hr.png') no-repeat scroll center top;
+  height: 22px;
+  margin: 40px 0 30px;
+}
+
+#pay-form .content-wrapper .rule2 {
+  background: url('../img/hr2.png') no-repeat scroll center top;
+  height: 41px;
+}
+
+#pay-form .credentials {
+  font-style: italic;
+  font-size: 18px;
+  line-height: 24px;
+  margin-bottom: 19px;
+}
+
+#pay-form .credentials span {
+  color: #b8b8b8;
+}
+
+#pay-form form {
+
+}
+
+#pay-form form img,
+#pay-form form input,
+#pay-form form button {
+  display: inline-block;
+  vertical-align: bottom;
+}
+
+#pay-form form img {
+  margin: 0 27px 5px 0;
+}
+#pay-form iframe {
+  display: none;
+}
+#pay-form form input {
+  width: 250px;
+  font-size: 24px;
+  padding: 11px 10px;
+  line-height: 24px;
+  color: black;
+  border: 2px solid #e8e3d7;
+  margin-right: 15px;
+  background: #f5f6db;
+  height: 24px;
+}
+#pay-form form button {
+  margin: 0;
+  font-family: intro;
+  font-weight: bold;
+  font-size: 18px;
+  padding: 11px 20px;
+  line-height: 24px;
+  color: #5a5756;
+  border: 2px solid #5a5756;
+  background: #fdd700;
+  height: 24px;
+  box-sizing: content-box;
+  text-transform: uppercase;
+  cursor: pointer;
+}
 
 .messages-modal {
   width: 100%;

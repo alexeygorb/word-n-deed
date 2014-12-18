@@ -46,9 +46,16 @@ $conf['vk_secret'] = 'Xudnb5hyz3UgNReu286q';
 if ($conf['environment'] == 'test') {
   $conf['fb_appid'] = '1566203040283717';
   $conf['fb_secret'] = '6848e4dfca191408216fe7e97d826c18';
+
+  $conf['liqpay_public_key'] = 'i14278414934';
+  $conf['liqpay_private_key'] = 'AX9rk3Rxc4FUIGCNFssLj7MiyXEskR9GjUvcmzMO';
 }
 
 if ($conf['environment'] == 'prod') {
   $conf['fb_appid'] = '1566203040283717';
   $conf['fb_secret'] = '6848e4dfca191408216fe7e97d826c18';
+
+  $conf['liqpay_public_key'] = 'i47399284535';
+  $conf['liqpay_private_key'] = 'KUS8knqXFDnVShEwBBEGEwQCMzOQuzo9lK4y8qDO';
 }
+

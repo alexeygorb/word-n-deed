@@ -11,7 +11,7 @@ function word_word_page() {
   $path = drupal_get_path('module', 'word');
   $render['#attached']['js'][] = array(
     'data' => array('pageSetup' => array(
-      'reserveY' => 130,
+      'reserveY' => 120,
       'reserveX' => 20,
       'rowHeight' => 455,
       'colWidth' => 260,
@@ -28,7 +28,17 @@ function word_word_page() {
 }
 
 function word_deed_page() {
-  return 'deed-page';
+  if (arg(1) == 'success') {
+    drupal_set_message(t('Your payment was received. Thanks!'));
+    drupal_goto('the-deed');
+  }
+  $render = array();
+  $render['content-wrapper'] = array(
+    '#theme' => 'deed_page',
+  );
+  $path = drupal_get_path('module', 'word');
+  $render['#attached']['js'][] = array('data' => $path . '/js/deed.js');
+  return $render;
 }
 
 function word_ajax_word_page($nid, $limit) {
@@ -78,19 +88,23 @@ function word_ajax_word_page($nid, $limit) {
     $nodes = node_load_multiple($nodes_list);
     $view = node_view_multiple($nodes);
     foreach ($view['nodes'] as $nid => $node_render) {
+      if (!is_numeric($nid)) continue;
+
       $i++;
       $style = 'two';
       if (round($i / 2) % 2 == 1) {
         $style = 'one';
       }
 
+
       if (empty($node_render['#attributes']['class'])) {
         $node_render['#attributes'] = array(
           'class' => array(),
         );
       }
+
       $node_render['#attributes']['class'][] = 'style-' . $style;
-      if (!is_numeric($nid)) continue;
+
       $response['items'][] = drupal_render($node_render);
       // Save the last one.
       $response['last-item'] = (int) $nid;
@@ -114,4 +128,53 @@ function word_ajax_avatar_save() {
     $response['token'] = word_get_token($file->fid);
   }
   print drupal_json_encode($response);
+}
+
+function word_ajax_liqpay() {
+  $amount = (int) $_POST['amount'];
+  if ($amount > 0) {
+    $public = variable_get('liqpay_public_key', '');
+    $private = variable_get('liqpay_private_key', '');
+    $data = array(
+      'version' => 3,
+      'public_key' => $public,
+      'amount' => $amount,
+      'currency' => 'UAH',
+      'description' => 'Благодійний внесок у фонд "Підтримай армію України"',
+      'order_id' => uniqid(date('YmdHis') . '-'),
+      'type' => 'donate',
+      'result_url' => url('the-deed/success', array('absolute' => TRUE)),
+      'server_url' => url('liqpay/callback', array('absolute' => TRUE)),
+    );
+    $json = json_encode($data);
+
+    $base64_data = base64_encode($json);
+
+    print '
+    <form method="POST" id="form" action="https://www.liqpay.com/api/checkout" target="_top"
+   accept-charset="utf-8">
+     <input type="hidden" name="data" value="' . $base64_data . '"/>
+     <input type="hidden" name="signature" value="' . base64_encode(sha1( $private . $base64_data . $private, 1)) . '"/>
+     <input type="image" src="//static.liqpay.com/buttons/p1ru.radius.png"/>
+   </form>
+   <script>document.getElementById(\'form\').submit();</script>
+   ';
+
+  }
+
+}
+
+function word_liqpay_callback() {
+  $public = variable_get('liqpay_public_key', '');
+  $private = variable_get('liqpay_private_key', '');
+  $data = $_POST['data'];
+
+  $sign = base64_encode(sha1($private . $data . $private, 1));
+  if ($sign != $_POST['signature']) {
+    watchdog('liqpay', 'Wrong signature. Data = !data', array('!data' => base64_decode($data)), WATCHDOG_WARNING);
+    return NULL;
+  }
+
+  watchdog('liqpay', 'Payment callback. Data = !data', array('!data' => base64_decode($data)));
+  return NULL;
 }
