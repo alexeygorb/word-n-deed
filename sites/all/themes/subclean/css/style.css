@@ -703,7 +703,7 @@ a.messages-close {
 /*}*/
 
 @media (max-height: 860px) {
-  body.front #main-wrapper .field-name-body img {
+  body.front #main-wrapper .field-name-body img.logo {
     width: 237px;
     height: 246px;
   }
