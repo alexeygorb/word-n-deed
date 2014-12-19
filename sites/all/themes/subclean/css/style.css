@@ -160,11 +160,11 @@ body.front #page-wrapper {
 
 body.front #main-wrapper {
   width: 560px;
-  height: 700px;
+  height: 800px;
   position: absolute;
   top: 50%;
   left: 50%;
-  margin-top: -360px;
+  margin-top: -410px;
   margin-left: -280px;
 }
 
@@ -714,11 +714,11 @@ a.messages-close {
 
   body.front #main-wrapper {
     width: 560px;
-    height: 460px;
+    height: 560px;
     position: absolute;
     top: 50%;
     left: 50%;
-    margin-top: -225px;
+    margin-top: -275px;
     margin-left: -280px;
   }
 

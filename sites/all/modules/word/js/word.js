@@ -28,6 +28,12 @@
                 $.cookie('hint', '1', { expires: 14, path: '/' });
               });
             }
+
+            var hash = document.location.hash;
+            if (hash.charAt(0) == '#') { hash = hash.substr(1); }
+            if (hash == 'post') {
+              $('#node-card-add a').click();
+            }
           });
 
         };
