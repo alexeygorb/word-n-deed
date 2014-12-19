@@ -45,6 +45,14 @@
     attach: function(context, settings) {
 
       $('body').once('socials').each(function() {
+        $('.facebook-share').click(function(e) {
+          e.preventDefault();
+          FB.ui({
+            method: 'share',
+            href: 'http://' + document.location.hostname + '/'
+          }, function(response){});
+        });
+
         $('#fb-login-image').click(function(e) {
           e.preventDefault();
           //console.log(Drupal.FB.login);
