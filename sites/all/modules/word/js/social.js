@@ -79,6 +79,13 @@
           apiId: Drupal.settings.vk.appId
         });
 
+        var vkShare = $(VK.Share.button(false, {type: 'link_noicon', text: 'vkontakte'}));
+        vkShare.addClass('vkontakte-share');
+
+        $('.vkontakte-share').replaceWith(vkShare);
+
+
+
         $('#vk-login-image').click(function(e) {
           e.preventDefault();
           VK.Auth.login(authInfo);

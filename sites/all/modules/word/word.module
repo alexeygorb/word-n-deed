@@ -254,7 +254,13 @@ function word_preprocess_page(&$vars) {
 
   drupal_add_js('//vk.com/js/api/openapi.js', 'external');
 
+  drupal_add_html_head(array(
+    '#type' => 'markup',
+    '#markup' => '<script type="text/javascript" src="http://vk.com/js/api/share.js?90" charset="windows-1251"></script>',
+  ), 'vkapishare');
+
   drupal_add_js(drupal_get_path('module', 'word') . '/js/social.js');
+
 }
 
 function word_get_token($value) {
