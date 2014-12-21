@@ -1,0 +1,117 @@
+<?php
+
+function word_schema() {
+  $schema = array();
+  $schema['payments'] = array(
+    'description' => 'Table for liqpay dontaions.',
+    'fields' => array(
+      'pid' => array(
+        'description' => 'Payment id.',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE),
+      'tid' => array(
+        'description' => 'Transaction ID.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0),
+      'status' => array(
+        'description' => 'Transaction status.',
+        'type' => 'varchar',
+        'length' => 32,
+        'not null' => TRUE,
+        'default' => ''),
+      'amount' => array(
+        'description' => 'Amount donated.',
+        'type' => 'float',
+        'not null' => TRUE,
+        'default' => 0
+      ),
+      'comission' => array(
+        'description' => 'Amount donated.',
+        'type' => 'float',
+        'not null' => TRUE,
+        'default' => 0
+      ),
+      'orderid' => array(
+        'description' => 'Order id.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => ''),
+      'currency' => array(
+        'description' => 'Currency.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => ''),
+      'phone' => array(
+        'description' => 'Phone.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => ''),
+      'data' => array(
+        'description' => 'Serialized data',
+        'type' => 'text',
+        'not null' => TRUE,
+        'serialize' => TRUE,
+      ),
+      'added' => array(
+        'description' => 'The Unix timestamp when the node was created.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0),
+    ),
+    'indexes' => array(
+      'payment_created'        => array('added'),
+    ),
+    'primary key' => array('pid'),
+  );
+  return $schema;
+}
+
+/**
+ * Installs the payments DB table and inserts data from watchdog.
+ */
+function word_update_7001() {
+  if (!db_table_exists('payments')) {
+    drupal_install_schema('word');
+  }
+
+  // Rebuild schema.
+  drupal_get_schema('payments', TRUE);
+
+  if (db_table_exists('watchdog')) {
+    $result = db_select('watchdog', 'w')->fields('w')->condition('type', 'liqpay')->execute();
+    foreach ($result as $row) {
+      $vars = unserialize($row->variables);
+      $data = json_decode($vars['!data']);
+      if (!empty($data) && $data instanceof stdClass) {
+        $data = (array) $data;
+        $insert = new stdClass();
+        $insert->tid = $data['transaction_id'];
+        $insert->status = $data['status'];
+        $insert->amount = $data['amount'];
+        $insert->comission = $data['receiver_commission'];
+        $insert->orderid = $data['liqpay_order_id'];
+        $insert->currency = $data['currency'];
+        $insert->phone = $data['sender_phone'];
+        $insert->data = $data;
+        $insert->added = $row->timestamp;
+        drupal_write_record('payments', $insert);
+      }
+    }
+  }
+
+}
+
+
+function word_install() {
+  drupal_install_schema('word');
+}
+
+function word_uninstall() {
+  drupal_uninstall_schema('word');
+}

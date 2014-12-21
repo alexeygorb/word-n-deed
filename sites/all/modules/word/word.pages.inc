@@ -145,7 +145,14 @@ function word_ajax_liqpay() {
       'type' => 'donate',
       'result_url' => url('the-deed/success', array('absolute' => TRUE)),
       'server_url' => url('liqpay/callback', array('absolute' => TRUE)),
+      'language' => 'ru',
     );
+
+    // Testserver check.
+    if (variable_get('environment', 'prod') == 'test') {
+      $data['sandbox'] = 1;
+    }
+
     $json = json_encode($data);
 
     $base64_data = base64_encode($json);
@@ -170,11 +177,29 @@ function word_liqpay_callback() {
   $data = $_POST['data'];
 
   $sign = base64_encode(sha1($private . $data . $private, 1));
+  $data = base64_decode($data);
   if ($sign != $_POST['signature']) {
-    watchdog('liqpay', 'Wrong signature. Data = !data', array('!data' => base64_decode($data)), WATCHDOG_WARNING);
+    watchdog('liqpay', 'Wrong signature. Data = !data', array('!data' => $data), WATCHDOG_WARNING);
     return NULL;
   }
 
-  watchdog('liqpay', 'Payment callback. Data = !data', array('!data' => base64_decode($data)));
+  watchdog('liqpay', 'Payment callback. Data = !data', array('!data' => $data));
+
+  $data = json_decode($data);
+  if (!empty($data) && $data instanceof stdClass) {
+    $data = (array) $data;
+    $insert = new stdClass();
+    $insert->tid = $data['transaction_id'];
+    $insert->status = $data['status'];
+    $insert->amount = $data['amount'];
+    $insert->comission = $data['receiver_commission'];
+    $insert->orderid = $data['liqpay_order_id'];
+    $insert->currency = $data['currency'];
+    $insert->phone = $data['sender_phone'];
+    $insert->data = $data;
+    $insert->added = time();
+    drupal_write_record('payments', $insert);
+  }
+
   return NULL;
 }
