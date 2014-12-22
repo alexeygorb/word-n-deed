@@ -163,7 +163,12 @@ body.page-the-word {
 }
 
 body.front {
-  background: url('../img/front-bg.jpg') no-repeat scroll 65% 30%;
+  background: url('../img/front-bg-2.jpg') no-repeat scroll center center;
+  /*background-size: 100% auto;*/
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
 body.front #page-wrapper {
@@ -229,12 +234,12 @@ body.front .node-page .actions {
 }
 
 body.page-the-deed {
-  background: url('../img/bg-snow.jpg') no-repeat scroll center center;
-  background-size: 100% auto;
-}
-
-body.page-the-deed #page-wrapper {
-  background: url('../img/spalnik.png') no-repeat scroll center center;
+  background: url('../img/spalnik.jpg') no-repeat scroll center center;
+  /*background-size: 100% auto;*/
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
 body.page-the-deed #page {
@@ -710,6 +715,42 @@ a.messages-close {
   text-transform: uppercase;
   font-weight: bold;
   font-size: 13px;
+}
+
+.parallax-container {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.parallax-container .layer,
+.parallax-container .scene,
+.parallax-container .scene div {
+  display: block;
+  height: 100%;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+.snow1 {
+  background: url('../img/snow1.png') no-repeat scroll center center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.snow2 {
+  background: url('../img/snow2.png') no-repeat scroll center center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
 /* Debug mode */

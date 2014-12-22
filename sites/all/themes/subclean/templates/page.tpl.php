@@ -108,3 +108,11 @@
     </div>
   </div>
 </div>
+<?php if (!empty($use_parallax)): ?>
+<div class="parallax-container">
+  <ul id="scene" class="scene">
+    <li class="layer" data-depth="0.30"><div class="snow1"></div></li>
+    <li class="layer" data-depth="0.50"><div class="snow2"></div></li>
+  </ul>
+</div>
+<?php endif; ?>
