@@ -111,18 +111,30 @@ a:hover {
 
 #block-menu-menu-social li a {
   display: block;
-  background: url('../img/socials.png') no-repeat scroll -27px 0;
+  background: url('../img/socials-sprite.png') no-repeat scroll 0 0;
   height: 30px;
   width: 30px;
   text-indent: -9999px;
   outline: none;
 
 }
-#block-menu-menu-social li.first a {
-  background-position: 0 0;
+#block-menu-menu-social li a.facebook-share {
+  background-position: 0 -4px;
 }
-#block-menu-menu-social li.last a {
-  background-position: -58px 0;
+#block-menu-menu-social li a.facebook-share:hover {
+  background-position: 0 -34px;
+}
+#block-menu-menu-social li a.twitter-share {
+  background-position: -32px -4px;
+}
+#block-menu-menu-social li a.twitter-share:hover {
+  background-position: -32px -34px;
+}
+#block-menu-menu-social li a.vkontakte-share {
+  background-position: -63px -4px;
+}
+#block-menu-menu-social li a.vkontakte-share:hover {
+  background-position: -63px -34px;
 }
 
 .page-the-word #logo {
@@ -273,6 +285,11 @@ body.page-the-deed #page {
 
 #cards-container-inner {
   color: #fff;
+  /*cursor: url(images/cursor.cur);*/
+  cursor: url('../img/cur-grab.png') 17 5, grab;
+}
+#cards-container-inner.move {
+  cursor: url('../img/cur-grabbing.png') 17 5, grabbing;
 }
 #cards-container-inner .column {
   width: 260px;
@@ -702,7 +719,7 @@ a.messages-close {
   /*display: none !important;*/
 /*}*/
 
-@media (max-height: 860px) {
+@media (max-height: 800px) {
   body.front #main-wrapper .field-name-body img.logo {
     width: 237px;
     height: 246px;

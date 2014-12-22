@@ -101,9 +101,11 @@
     disabled: false,
     swiper: null,
     loadNext: function() {
+      //console.log('trigger');
       var self = this;
       if (!self.lock && !self.disabled) {
         self.lock = true;
+        //console.log('load');
         $.ajax({
           url: Drupal.settings.pageSetup.ajaxHandler + '/' + self.offset + '/' + self.limit,
           dataType: 'json',
@@ -196,7 +198,12 @@
         createPagination: false,
         speed: 800,
         mousewheelControl: true,
-        onSlideChangeStart: function(swiper, direction) { self.onSlideChange(swiper, direction); }
+        keyboardControl: true,
+        // freeMode: true,
+        // freeModeFluid: true,
+        onSlideChangeStart: function(swiper, direction) { self.onSlideChange(swiper, direction); },
+        onTouchStart: function() { $('#cards-container-inner').addClass('move') },
+        onTouchEnd: function() { $('#cards-container-inner').removeClass('move') }
       });
     },
 
