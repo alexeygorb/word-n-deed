@@ -15,6 +15,13 @@
         <?php if (!$is_front && $logo): ?>
           <?php print render($page['logo']) ?>
         <?php endif; ?>
+        <?php if ($is_front): ?>
+          <?php print l(theme('image', array('path' => $directory . '/img/tribal_logo.png')), 'http://tribalddb.com.ua/', array(
+            'html' => TRUE,
+            'attributes' => array('id' => 'logo'),
+            'external' => TRUE,
+          )); ?>
+        <?php endif; ?>
 
         <?php if ($site_name || $site_slogan): ?>
           <div id="name-and-slogan">

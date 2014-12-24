@@ -150,6 +150,12 @@ a:hover {
   background: url(../img/logo-deed.png) no-repeat scroll 0 0;
 }
 
+body.front #logo {
+  display: block;
+  position: absolute;
+  left: 0;
+}
+
 /* End of word, deed pages */
 body.page-the-word {
   background-color: #30509b;
@@ -177,11 +183,11 @@ body.front #page-wrapper {
 
 body.front #main-wrapper {
   width: 560px;
-  height: 800px;
+  height: 700px;
   position: absolute;
   top: 50%;
   left: 50%;
-  margin-top: -410px;
+  margin-top: -360px;
   margin-left: -280px;
 }
 
@@ -332,6 +338,7 @@ body.page-the-deed #page {
   border: 2px solid #eeeff6;
   margin-top: 2px;
   padding: 6px;
+  font-family: intro;
 }
 
 .node-teaser-card .field-type-text-long {
@@ -772,11 +779,11 @@ a.messages-close {
 
   body.front #main-wrapper {
     width: 560px;
-    height: 560px;
+    height: 460px;
     position: absolute;
     top: 50%;
     left: 50%;
-    margin-top: -275px;
+    margin-top: -225px;
     margin-left: -280px;
   }
 
