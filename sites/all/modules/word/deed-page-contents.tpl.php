@@ -4,14 +4,14 @@
 <div id="spalnik-container">
   <h2>Спальник</h2>
   <h3>Pinguin Trekking</h3>
-  <p>Ми збираємо гроші на спальні мішки Pinguin Trekking для українських вояків. У них тепло навіть при -20. Допоможи нам – кожна гривня важлива.</p>
+  <p>Ми збираємо кошти на речі, які потрібні українським вояками на передовій: спальники, берці, бушлати, намети, буржуйки. Все, що може зігріти бійців. Допоможи нам – кожна гривня важлива.</p>
   <p><a href="#" class="form-trigger">Допомогти</a></p>
 </div>
 <div id="pay-form" class="popup-container">
   <a class="x" href="#">Закрити</a>
   <div class="content-wrapper">
     <img src="/<?php print $directory; ?>/images/pay-logo.png" width="150" height="150" class="logo" />
-    <p>Ми збираємо гроші на спальні мішки Pinguin Trekking для українських вояків. У них тепло навіть при -20. Допоможи нам – кожна гривня важлива.</p>
+    <p>Ми збираємо кошти на речі, які потрібні українським вояками на передовій: спальники, берці, бушлати, намети, буржуйки. Все, що може зігріти бійців. Допоможи нам – кожна гривня важлива.</p>
     <form action="/ajax/liqpay" target="frame" method="post">
       <img src="/<?php print $directory; ?>/images/privat24.jpg" />
       <input type="text" name="amount" value="450" />
